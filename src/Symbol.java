@@ -12,14 +12,14 @@ import yahoofinance.histquotes.Interval;
 
 public class Symbol extends Stock {
 	
-	private final int DAYS_HISTORY = 2000;
+	private final int DAYS_HISTORY = 2000; //final: 防止数值被修改，如多线程中
 	
 	// Keep historical data that we have already pulled to speed up getHistory method
 	private List<HistoricalQuote> history = new ArrayList<>(0);
 	
-	public Symbol(String symbol) throws IOException {
+	public Symbol(String symbol) throws IOException { //构造方法
 		super(symbol);
-		Stock stock = YahooFinance.get(symbol);
+		Stock stock = YahooFinance.get(symbol); //Stock tesla = YahooFinance.get("TSLA", true);
 		setQuote(stock.getQuote());
 		setStats(stock.getStats());
 		setDividend(stock.getDividend());
@@ -40,7 +40,7 @@ public class Symbol extends Stock {
 	 * @return list of historical quotes from time period
 	 * @throws IOException
 	 */
-	public List<HistoricalQuote> getHistory(int daysAgo, int days) throws IOException {		
+	public List<HistoricalQuote> getHistory(int daysAgo, int days) throws IOException { // 重定向了Stock.getHistory()		
 		// Create an integer to hold the farthest back day requested
 		int fromDay = daysAgo + days;
 
