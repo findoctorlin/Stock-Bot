@@ -46,7 +46,7 @@ public class Symbol extends Stock {
 
 		// Filter the list down to what we need
 		// Only subtract 1 from first parameter because it is inclusive
-		return history.subList(daysAgo, fromDay);
+		return history.subList(daysAgo, fromDay); // history在构造方法中被定义
 	}
 
 	/**
@@ -56,8 +56,8 @@ public class Symbol extends Stock {
 	 * @return historical quote from a given amount of days ago
 	 * @throws IOException
 	 */
-	public HistoricalQuote getDay(int daysAgo) throws IOException {
-		return getHistory(daysAgo, 1).get(0);
+	public HistoricalQuote getDay(int daysAgo) throws IOException { // 返回整个HistoricalQuote对象，包含其中的private字段(symbol, date, open, close...)
+		return getHistory(daysAgo, 1).get(0); // 返回第0天当天的symbol股对应的日期和价格信息
 	}
 
 	/**
@@ -67,8 +67,8 @@ public class Symbol extends Stock {
 	 * @return historical adjusted closing price
 	 * @throws IOException
 	 */
-	public BigDecimal getAdjClose(int daysAgo) throws IOException {
-		return getDay(daysAgo).getAdjClose();
+	public BigDecimal getAdjClose(int daysAgo) throws IOException { // BigDecimal对象是不可变的，一旦创建就不能修改其值
+		return getDay(daysAgo).getAdjClose(); //getAdjClose()返回的是private BigDecimal adjClose
 	}
 	
 	/**
